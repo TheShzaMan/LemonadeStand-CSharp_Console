@@ -37,17 +37,19 @@ namespace LemonadeStand
             }
         }
 
-        public void AddSugarCubesToInventory(int numberOfSugarCubes)
+        public void AddSugarCubesToInventory(int numberOfSugarCubesCases)
         {
-            for(int i = 0; i < numberOfSugarCubes; i++)
+            int numberOfSugarCubes = numberOfSugarCubesCases * 10;
+            for (int i = 0; i < numberOfSugarCubes; i++)
             {
                 SugarCube sugarCube = new SugarCube();
                 sugarCubes.Add(sugarCube);
             }
         }
 
-        public void AddIceCubesToInventory(int numberOfIceCubes)
+        public void AddIceCubesToInventory(int numberOfIceCubesCases)
         {
+            int numberOfIceCubes = numberOfIceCubesCases * 100;
             for(int i = 0; i < numberOfIceCubes; i++)
             {
                 IceCube iceCube = new IceCube();
@@ -55,9 +57,10 @@ namespace LemonadeStand
             }
         }
 
-        public void AddCupsToInventory(int numberOfCups)
+        public void AddCupsToInventory(int numberOfCupsCases)
         {
-            for(int i = 0; i < numberOfCups; i++)
+            int numberOfCups = numberOfCupsCases * 50;
+            for (int i = 0; i < numberOfCups; i++)
             {
                 Cup cup = new Cup();
                 cups.Add(cup);

@@ -35,36 +35,36 @@ namespace LemonadeStand
             }
         }
 
-        public void SellSugarCubes(Player player)
+        public void SellSugarCubesCase(Player player)
         {
-            int sugarToPurchase = UserInterface.GetNumberOfItems("sugar");
-            double transactionAmount = CalculateTransactionAmount(sugarToPurchase, pricePerSugarCube);
+            int sugarCasesToPurchase = UserInterface.GetNumberOfItems("sugar cubes cases");
+            double transactionAmount = CalculateTransactionAmount(sugarCasesToPurchase, (pricePerSugarCube * 10));
             if(player.wallet.Money >= transactionAmount)
             {
                 PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddSugarCubesToInventory(sugarToPurchase);
+                player.inventory.AddSugarCubesToInventory(sugarCasesToPurchase * 10);
             }
         }
 
-        public void SellIceCubes(Player player)
+        public void SellBagsOfIce(Player player)
         {
-            int iceCubesToPurchase = UserInterface.GetNumberOfItems("ice cubes");
-            double transactionAmount = CalculateTransactionAmount(iceCubesToPurchase, pricePerIceCube);
+            int bagsOfIceToPurchase = UserInterface.GetNumberOfItems("bags of ice");
+            double transactionAmount = CalculateTransactionAmount(bagsOfIceToPurchase, (pricePerIceCube * 100));
             if(player.wallet.Money >= transactionAmount)
             {
                 PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddIceCubesToInventory(iceCubesToPurchase);
+                player.inventory.AddIceCubesToInventory(bagsOfIceToPurchase * 100);
             }
         }
 
         public void SellCups(Player player)
         {
-            int cupsToPurchase = UserInterface.GetNumberOfItems("cups");
-            double transactionAmount = CalculateTransactionAmount(cupsToPurchase, pricePerCup);
+            int fiftyCupsToPurchase = UserInterface.GetNumberOfItems("cases of 50 cups");
+            double transactionAmount = CalculateTransactionAmount(fiftyCupsToPurchase, (pricePerCup * 50));
             if(player.wallet.Money >= transactionAmount)
             {
                 PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddCupsToInventory(cupsToPurchase);
+                player.inventory.AddCupsToInventory(fiftyCupsToPurchase * 50);
             }
         }
 
