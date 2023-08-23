@@ -17,7 +17,7 @@ namespace LemonadeStand
         // constructor (SPAWNER)
         public Store()
         {
-            pricePerLemon = .5;
+            pricePerLemon = .50;
             pricePerSugarCube = .1;
             pricePerIceCube = .01;
             pricePerCup = .25;
@@ -77,6 +77,14 @@ namespace LemonadeStand
         private void PerformTransaction(Wallet wallet, double transactionAmount)
         {
             wallet.PayMoneyForItems(transactionAmount);
+        }
+
+        public void DisplayCatalog()
+        {
+            Console.WriteLine($"\nLemons..................${pricePerLemon:F2}ea\n" +
+                $"Sugar Cubes (10/cs).....${pricePerSugarCube * 10:F2}\n" +
+                $"Bag of Ice (100cubes)...${pricePerIceCube * 100:F2}\n" +
+                $"Cups (50/cs)...........${pricePerCup * 50F:F2}");
         }
     }
 }
