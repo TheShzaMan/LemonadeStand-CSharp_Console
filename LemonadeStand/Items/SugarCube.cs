@@ -13,7 +13,7 @@ namespace LemonadeStand
         // constructor (SPAWNER)
         public SugarCube()
         {
-            name = "sugar cube";
+            Name = "sugar cube";
         }
 
         // member methods (CAN DO)

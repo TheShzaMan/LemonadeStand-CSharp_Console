@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace LemonadeStand
 {
-    class IceCube : Item
+    internal class Day
     {
         // member variables (HAS A)
 
         // constructor (SPAWNER)
-        public IceCube()
-        {
-            Name = "ice cube";
-        }
+       
 
         // member methods (CAN DO)
     }

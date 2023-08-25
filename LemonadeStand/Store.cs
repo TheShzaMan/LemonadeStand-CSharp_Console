@@ -26,7 +26,7 @@ namespace LemonadeStand
         // member methods (CAN DO)
         public void SellLemons(Player player)
         {
-            int lemonsToPurchase = UserInterface.GetNumberOfItems("lemons");
+            int lemonsToPurchase = UserInterface.GetNumberOfItems("Lemons");
             double transactionAmount = CalculateTransactionAmount(lemonsToPurchase, pricePerLemon);
             if(player.wallet.Money >= transactionAmount)
             {
@@ -59,7 +59,7 @@ namespace LemonadeStand
 
         public void SellCups(Player player)
         {
-            int fiftyCupsToPurchase = UserInterface.GetNumberOfItems("cases of 50 cups");
+            int fiftyCupsToPurchase = UserInterface.GetNumberOfItems("cases of 50 Cups");
             double transactionAmount = CalculateTransactionAmount(fiftyCupsToPurchase, (pricePerCup * 50));
             if(player.wallet.Money >= transactionAmount)
             {

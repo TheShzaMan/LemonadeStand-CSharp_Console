@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class IceCube : Item
+    internal class Weather
     {
         // member variables (HAS A)
 
         // constructor (SPAWNER)
-        public IceCube()
-        {
-            Name = "ice cube";
-        }
+
 
         // member methods (CAN DO)
     }

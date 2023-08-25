@@ -22,6 +22,17 @@ namespace LemonadeStand
         }
 
         // member methods (CAN DO)
+        public void makeLemonadePitcher()
+        {
 
+            int numberOfPitchers = UserInterface.GetNumberOfPitchers();
+            inventory.UseLemonsFromInventory(numberOfPitchers * recipe.numberOfLemons);
+            inventory.UseSugarCubesFromInventory(numberOfPitchers * recipe.numberOfSugarCubes);
+            inventory.UseIceCubesFromInventory(numberOfPitchers * recipe.numberOfIceCubes);
+            inventory.AddLemonadeToInventory //need to add code for this.  Also add if statement here checking inventory levels vs requsted pitchers
+                 
+           
+
+        }
     }
 }
