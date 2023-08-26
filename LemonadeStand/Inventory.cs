@@ -13,7 +13,7 @@ namespace LemonadeStand
         public List<SugarCube> SugarCubes;
         public List<IceCube> IceCubes;
         public List<Cup> Cups;
-        public Lemonade Lemonade;
+        public List<Lemonade> LemonadeServings;
 
         // constructor (SPAWNER)
         public Inventory()
@@ -22,6 +22,8 @@ namespace LemonadeStand
             SugarCubes = new List<SugarCube>();
             IceCubes = new List<IceCube>();
             Cups = new List<Cup>();
+            LemonadeServings = new List<Lemonade>();
+
             AddLemonsToInventory(20);
             AddSugarCubesToInventory(20);
             AddIceCubesToInventory(100);
@@ -36,6 +38,21 @@ namespace LemonadeStand
                 $"{IceCubes.Count} ice cubes and\n" +
                 $"{Cups.Count} cups\n");
         }
+        public void AddLemonadeToInventory(int numberOfPitchers)
+        {
+            for (int i = 0; i < (8 * numberOfPitchers); i++)
+            { 
+                Lemonade serving = new Lemonade();
+                LemonadeServings.Add( serving );
+            }
+        }
+        public void UseLemonadeFromInventory(int numberOfCupsSold)
+        {
+            for (int i = 0; i < numberOfCupsSold; i++)
+            {
+                LemonadeServings.Remove(LemonadeServings[LemonadeServings.Count - 1]);
+            }
+        }
         public void AddLemonsToInventory(int numberOfLemons)
         {
             for(int i = 0; i < numberOfLemons; i++)
@@ -46,11 +63,9 @@ namespace LemonadeStand
         }
         public void UseLemonsFromInventory(int totalLemonsNeeded)
         {
-
             for (int i = 0; i < totalLemonsNeeded; i++)
             {
-                Lemons.Remove(Lemons[0]);
-
+                Lemons.Remove(Lemons[Lemons.Count - 1]);
             }
         }
 
@@ -68,8 +83,7 @@ namespace LemonadeStand
 
             for (int i = 0; i < totalSugarCubesNeeded; i++)
             {
-                SugarCubes.Remove(SugarCubes[0]);
-
+                SugarCubes.Remove(SugarCubes[SugarCubes.Count - 1]);
             }
         }
 
@@ -87,8 +101,7 @@ namespace LemonadeStand
 
             for (int i = 0; i < totalIceCubesNeeded; i++)
             {
-                IceCubes.Remove(IceCubes[0]);
-
+                IceCubes.Remove(IceCubes[IceCubes.Count - 1]);
             }
         }
 
@@ -106,7 +119,7 @@ namespace LemonadeStand
 
             for (int i = 0; i < numberOfCupsSold; i++)
             {
-                Cups.Remove(Cups[0]);
+                Cups.Remove(Cups[Cups.Count - 1]);
             }
         }
 

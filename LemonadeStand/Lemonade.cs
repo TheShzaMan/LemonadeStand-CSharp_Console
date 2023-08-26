@@ -8,20 +8,11 @@ namespace LemonadeStand
 {
     internal class Lemonade : Item
     {
-        public int ServingsOfLemonade;
+        
         public Lemonade()
         {
-            ServingsOfLemonade = 0;
+            Name = "lemonade";
         }
-        public void PourLemonade(int servings)
-        {
-            if (ServingsOfLemonade >= servings)
-            { 
-                ServingsOfLemonade -= servings;
-            }
-            else
-            {
-                Console.WriteLine();
-            }
+        
     }
 }

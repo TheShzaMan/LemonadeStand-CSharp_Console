@@ -36,8 +36,17 @@ namespace LemonadeStand
 
                 userInputIsAnInteger = Int32.TryParse(Console.ReadLine(), out quantityOfItem);
             }
-
             return quantityOfItem;
+        }
+        public static string GetPlayerName()
+        {
+            string playerNameInput;
+
+            Console.WriteLine("\nPlease enter a name for yourself:");
+            playerNameInput = Console.ReadLine();
+            Console.WriteLine($"\nHello, {playerNameInput}, pleasure to meet you!\n" +
+                $"press 'enter' to continue"); Console.ReadLine();
+            return playerNameInput;
         }
 
     }

@@ -8,9 +8,11 @@ namespace LemonadeStand
         {
             //Game game1 = new Game();
             //game1.RunGame();
+            Player player = new Player(UserInterface.GetPlayerName());
             Inventory inventory = new Inventory();
-            inventory.UseLemonsFromInventory(30);
-            
+            //inventory.DisplayCurrentInventory();
+            player.MakeLemonade(UserInterface.GetNumberOfPitchers());
+            player.SellLemonade(6);
 
         }
     }

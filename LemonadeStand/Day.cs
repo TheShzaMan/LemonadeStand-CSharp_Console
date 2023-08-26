@@ -10,6 +10,7 @@ namespace LemonadeStand
     internal class Day
     {
         // member variables (HAS A)
+        public Player Player;
 
         // constructor (SPAWNER)
        
