@@ -11,9 +11,13 @@ namespace LemonadeStand
     {
         // member variables (HAS A)
         public Player Player;
+        public int DayNumber
 
         // constructor (SPAWNER)
-       
+       public Day(int dayNumber)
+        {
+            DayNumber = dayNumber;
+        }
 
         // member methods (CAN DO)
     }
