@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Wallet
+    public class Wallet
     {
         // member variables (HAS A)
         private double money;
@@ -30,9 +30,15 @@ namespace LemonadeStand
             money -= transactionAmount;
         }
 
-        public void AcceptMoney(double income)
+        public double AcceptMoney(double income)
         {
             money += income;
+            return income;
+
+        }
+        public void ShowBalance()
+        {
+            Console.WriteLine($"\nYou have a total of ${money} in your wallet.\n <press enter>");Console.ReadLine();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -11,14 +12,89 @@ namespace LemonadeStand
     {
         // member variables (HAS A)
         public Player Player;
-        public int DayNumber
+        public Weather Weather;
+        public List<Customer> TodaysCustomers;
+        public int DayNumber;
+        public double DailySales;
 
         // constructor (SPAWNER)
-       public Day(int dayNumber)
+        public Day(int dayNumber)
         {
+            DailySales = 0;
             DayNumber = dayNumber;
+            Weather = new Weather();
+            Weather.GenerateWeatherCondition();
+            Weather.ForecastTemp();
+            TodaysCustomers = new List<Customer> { new TypeA(), new TypeB(), new TypeC(), new TypeX() };
         }
 
         // member methods (CAN DO)
+        public void DisplayForecast()
+        {
+            Console.WriteLine($"Today's forecast is {Weather.TodaysForecast} with temperatures in the {Weather.ForecastedTemp}");
+        }
+        public void SetupTheDay(Player player)
+        {
+            Player = player;
+            Console.WriteLine($"\n\n\t**DAY {DayNumber}**\n\n");
+            DisplayForecast();
+            Player.inventory.DisplayCurrentInventory();
+            Player.wallet.ShowBalance();
+            Console.WriteLine($"\nAlright {Player.Name}, let's head to the store to prepare for today's business\n <press enter>");
+            Console.ReadLine();
+        }
+        //public void RunDay()
+        //{
+
+        //}
+        public void DisplayActualWeather()
+        {
+            Console.WriteLine($"Today's actual weather turned out to be {Weather.ActualTemp} degrees and {Weather.ActualCondition}.\n" +
+                $"Press enter to see how it effects the lemonade biz...\n"); Console.ReadLine();
+        }
+        public void AddCustomer()
+        {
+            Random rndm = new Random();
+            int rndmCustIndex = rndm.Next(TodaysCustomers.Count);
+            int numberOfCusts;
+            
+            if (Weather.ActualTemp > 70 && Weather.ActualCondition == "sunny")
+            {
+                numberOfCusts = rndm.Next(15, 20);
+                for (int i = 0; i < numberOfCusts; i++)
+                {
+                    
+                    TodaysCustomers.Add(TodaysCustomers[rndmCustIndex]);
+                }
+            }
+            else if ((Weather.ActualCondition == "stormy" || Weather.ActualCondition == "windy") && Weather.ActualTemp > 40)
+            {
+                numberOfCusts = rndm.Next(5, 15);
+                for (int i = 0; i < numberOfCusts; i++)
+                {
+                    TodaysCustomers.Add(TodaysCustomers[rndmCustIndex]);
+                }
+            }
+            else if (Weather.ActualCondition == "freezing" || Weather.ActualTemp <= 40)
+            {
+                numberOfCusts = rndm.Next(10);
+                for (int i = 0; i < numberOfCusts; i++)
+                {
+                    TodaysCustomers.Add(TodaysCustomers[rndmCustIndex]);
+                }
+            }
+        }
+        public double OpenForBusiness()
+        {
+            foreach (Customer customer in TodaysCustomers)
+            {
+                customer.DecideToBuy(Weather.ActualCondition, Weather.ActualTemp, Player.recipe.price);
+                double income = customer.BuyLemonade(Player);
+                DailySales += income;
+                
+            }
+            Console.WriteLine($"Your total sales for the day were ${DailySales}!\n\n");
+            return DailySales;
+        }
     }
 }

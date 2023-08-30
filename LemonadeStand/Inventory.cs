@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Inventory
+    public class Inventory
     {
         // member variables (HAS A)
         public List<Lemon> Lemons;
@@ -25,18 +25,18 @@ namespace LemonadeStand
             LemonadeServings = new List<Lemonade>();
 
             AddLemonsToInventory(20);
-            AddSugarCubesToInventory(20);
-            AddIceCubesToInventory(100);
-            AddCupsToInventory(30);
+            AddSugarCubesToInventory(2);
+            AddIceCubesToInventory(1);
+            AddCupsToInventory(1);
         }
 
         // member methods (CAN DO)
         public void DisplayCurrentInventory()
         {
-            Console.WriteLine($"\nYou currently have:\n {Lemons.Count} lemons,\n" +
+            Console.WriteLine($"\nIn your inventory you currently have:\n{Lemons.Count} lemons,\n" +
                 $"{SugarCubes.Count} sugar cubes,\n" +
                 $"{IceCubes.Count} ice cubes and\n" +
-                $"{Cups.Count} cups\n");
+                $"{Cups.Count} cups");
         }
         public void AddLemonadeToInventory(int numberOfPitchers)
         {
@@ -107,7 +107,7 @@ namespace LemonadeStand
 
         public void AddCupsToInventory(int numberOfCupsCases)
         {
-            int numberOfCups = numberOfCupsCases * 50;
+            int numberOfCups = numberOfCupsCases * 25;
             for (int i = 0; i < numberOfCups; i++)
             {
                 Cup cup = new Cup();

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Player
+    public class Player
     {
         // member variables (HAS A)
         public Inventory inventory;
@@ -25,6 +26,21 @@ namespace LemonadeStand
 
         // member methods (CAN DO)
        
+        public void MakeLemonade()
+        {
+            Console.WriteLine($"Okay {Name}, let's make some lemonade!\n");
+            recipe.DisplayRecipe();
+            recipe.AdjustPrice();
+            int numberOfPitchers = UserInterface.GetNumberOfPitchers();
+            bool hasEnoughToMakeLemonade = EvaluateRequest(numberOfPitchers);
+            if (hasEnoughToMakeLemonade)
+            {
+                inventory.UseLemonsFromInventory(numberOfPitchers * recipe.numberOfLemons);
+                inventory.UseSugarCubesFromInventory(numberOfPitchers * recipe.numberOfSugarCubes);
+                inventory.UseIceCubesFromInventory(numberOfPitchers * recipe.numberOfIceCubes);
+                inventory.AddLemonadeToInventory(numberOfPitchers);
+            }
+        }
         public bool EvaluateRequest(int numberOfPitchers)
         {
             bool hasEnoughToMakeLemonade = false;
@@ -33,7 +49,7 @@ namespace LemonadeStand
             int iceCubesNeeded = numberOfPitchers * recipe.numberOfIceCubes;
             int cupsNeeded = numberOfPitchers * 8;
             if (inventory.Lemons.Count >= lemonsNeeded && 
-                inventory.SugarCubes.Count >= iceCubesNeeded && 
+                inventory.SugarCubes.Count >= sugarCubesNeeded && 
                 inventory.IceCubes.Count >= iceCubesNeeded && 
                 inventory.Cups.Count >= cupsNeeded)
             {
@@ -46,24 +62,16 @@ namespace LemonadeStand
             return hasEnoughToMakeLemonade;
 
         }
-        public void MakeLemonade(int numberOfPitchers)
-        {
-            if (EvaluateRequest(numberOfPitchers))
-            {
-                inventory.UseLemonsFromInventory(numberOfPitchers * recipe.numberOfLemons);
-                inventory.UseSugarCubesFromInventory(numberOfPitchers * recipe.numberOfSugarCubes);
-                inventory.UseIceCubesFromInventory(numberOfPitchers * recipe.numberOfIceCubes);
-                inventory.AddLemonadeToInventory(numberOfPitchers);
-            }
-        }
-        public void SellLemonade(int servingsOrdered)
+        public double SellLemonade(int servingsOrdered)
         {
             if (inventory.LemonadeServings.Count >= servingsOrdered)
             {
                 inventory.UseLemonadeFromInventory(servingsOrdered);
                 double income = (servingsOrdered * recipe.price);
                 wallet.AcceptMoney(income);
+
                 Console.WriteLine($"{Name}: Thank you so much!  Enjoy!");
+                return income;
             }
             else if ((inventory.LemonadeServings.Count - servingsOrdered) < 0)
             {
@@ -71,6 +79,7 @@ namespace LemonadeStand
                 double incomeToSoldOut = (inventory.LemonadeServings.Count * recipe.price);
                 wallet.AcceptMoney(incomeToSoldOut);
                 inventory.UseLemonadeFromInventory(inventory.LemonadeServings.Count);
+                return incomeToSoldOut;
             }
             else
             {
@@ -78,6 +87,7 @@ namespace LemonadeStand
                 double income = (servingsOrdered * recipe.price);
                 wallet.AcceptMoney(income);
                 Console.WriteLine($"{Name}: Thank you so much!  Enjoy!\n\nYou have sold out for the day.");
+                return income;
             }
         }
     }

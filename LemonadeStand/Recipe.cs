@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    internal class Recipe
+    public class Recipe
     {
         // member variables (HAS A)
         public int numberOfLemons;
@@ -18,8 +18,8 @@ namespace LemonadeStand
         // constructor (SPAWNER)
         public Recipe()
         {
-            numberOfLemons = 2;
-            numberOfSugarCubes = 4;
+            numberOfLemons = 4;
+            numberOfSugarCubes = 5;
             numberOfIceCubes = 10;
             price = 1;
         }
@@ -27,10 +27,25 @@ namespace LemonadeStand
         //Member Methods (CAN DO)
         public void DisplayRecipe()
         {
-            Console.WriteLine($"Your recipe currently consists of:\n{numberOfLemons} Lemons per pitcher\n{numberOfSugarCubes} sugar cubes per pitcher\n{numberOfIceCubes} ice cubes per pitcher");
+            //Console.WriteLine($"Currently, your recipe for making 1 pitcher of lemonade calls for:"); ////**sub in if adding option for recipe changes
+            Console.WriteLine($"\nThe recipe for making 1 pitcher of lemonade calls for:");
+            Console.WriteLine($"{numberOfLemons} lemons\n" +
+                $"{numberOfSugarCubes} sugar cubes\n" +
+                $"{numberOfIceCubes} ice cubes\n" +
+                $"you will also need to have at least 8 cups per pitcher to serve your lemonade.");
+            //Console.WriteLine("Press 1 if you would like to adjust the recipe, or press 2 to keep it as is for now...);////add in if adding this as an option
+            Console.WriteLine($"\nYou have the price set at ${price} per cup");
         }
-
-
-
+        public void AdjustPrice()
+        {
+            double newPrice = 0;
+            Console.WriteLine("You can change the price if you'd like, just keep in mind how it could effect sales.");
+            newPrice = UserInterface.GetPositiveNumber("To change price, enter a positive number without dollar sign. Enter 0 to keep current price");
+            if (newPrice > 0)
+            {
+                price = newPrice;
+                Console.WriteLine($"\nYou have the price set at ${price} per cup");
+            }
+        }
     }
 }
