@@ -93,11 +93,12 @@ namespace LemonadeStand
             int neededNumber = -1;
             bool correctInputType = false;
 
-            while (!correctInputType || neededNumber <= 0)
+            while (!correctInputType || neededNumber < 0)
             {
                 Console.WriteLine($"{promptToBeRepeatedUntilInputMatch}");
                 correctInputType = Int32.TryParse(Console.ReadLine(), out neededNumber);
             }
+            
             return neededNumber;
         }
     }

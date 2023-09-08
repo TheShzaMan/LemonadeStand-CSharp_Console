@@ -11,7 +11,7 @@ namespace LemonadeStand
     internal class Day
     {
         // member variables (HAS A)
-        public Player Player;
+        //public Player Player;
         public Weather Weather;
         public List<Customer> TodaysCustomers;
         public int DayNumber;
@@ -23,24 +23,22 @@ namespace LemonadeStand
             DailySales = 0;
             DayNumber = dayNumber;
             Weather = new Weather();
-            Weather.GenerateWeatherCondition();
-            Weather.ForecastTemp();
+            //Weather.GenerateWeatherCondition();
+            //Weather.GenerateTemperature();
+            //Weather.ForecastTemp();
             TodaysCustomers = new List<Customer> { new TypeA(), new TypeB(), new TypeC(), new TypeX() };
         }
 
         // member methods (CAN DO)
-        public void DisplayForecast()
-        {
-            Console.WriteLine($"Today's forecast is {Weather.TodaysForecast} with temperatures in the {Weather.ForecastedTemp}");
-        }
+       
         public void SetupTheDay(Player player)
         {
-            Player = player;
+            //Player = player;
             Console.WriteLine($"\n\n\t**DAY {DayNumber}**\n\n");
-            DisplayForecast();
-            Player.inventory.DisplayCurrentInventory();
-            Player.wallet.ShowBalance();
-            Console.WriteLine($"\nAlright {Player.Name}, let's head to the store to prepare for today's business\n <press enter>");
+            Weather.DisplayForecast();
+            player.inventory.DisplayCurrentInventory();
+            player.wallet.ShowBalance();
+            Console.WriteLine($"\nAlright {player.Name}, let's head to the store to prepare for today's business\n <press enter>");
             Console.ReadLine();
         }
         //public void RunDay()
@@ -84,17 +82,15 @@ namespace LemonadeStand
                 }
             }
         }
-        public double OpenForBusiness()
+        public void OpenForBusiness(Player player)
         {
             foreach (Customer customer in TodaysCustomers)
             {
-                customer.DecideToBuy(Weather.ActualCondition, Weather.ActualTemp, Player.recipe.price);
-                double income = customer.BuyLemonade(Player);
+                customer.DecideToBuy(Weather.ActualCondition, Weather.ActualTemp, player.recipe.price);
+                double income = customer.BuyLemonade(player);
                 DailySales += income;
-                
             }
             Console.WriteLine($"Your total sales for the day were ${DailySales}!\n\n");
-            return DailySales;
         }
     }
 }

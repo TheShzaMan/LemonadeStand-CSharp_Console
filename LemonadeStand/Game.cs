@@ -14,16 +14,17 @@ namespace LemonadeStand
         public Store Store;
         public int Duration;
         public Day CurrentDay;
+        private List<Day> Days;
         public double DailySalesTotal;
         public double GrandTotalSales;
         //public List<Day> Days;
-        public Day[] Days;
+        //public Day[] Days;
         // constructor (SPAWNER)
         public Game()
         {
             Store = new Store();
             DailySalesTotal = 0;
-
+            Days = new List<Day>();
         }
 
         // member methods (CAN DO)
@@ -31,15 +32,18 @@ namespace LemonadeStand
         {
             DisplayWelcome();
             RollTheDay();
+            DisplayGrandTotalSales();
 
                 //DisplayGrandTotalSales(DailySalesTotal);
         }
-        public double RollTheDay()
+        public void RollTheDay()
         {
             for (int i = 0; i < Duration; i++) 
             {
                 int dayNumber = i + 1;
                 CurrentDay = new Day(dayNumber);
+                Days.Add(new Day(dayNumber));
+               
                 CurrentDay.SetupTheDay(Player);
 
                 EnterStore();
@@ -50,10 +54,8 @@ namespace LemonadeStand
 
                 CurrentDay.AddCustomer();
 
-                DailySalesTotal = CurrentDay.OpenForBusiness();
+                CurrentDay.OpenForBusiness(Player);
             }
-            return DailySalesTotal;
-            
         }
         public void EnterStore()
         {
@@ -79,11 +81,13 @@ namespace LemonadeStand
             
             Console.WriteLine($"Alright {Player.Name}, you have {Duration} day/s to make as much profit as you can.  Let's begin!");
         }
-        public void DisplayGrandTotalSales(double dailySales)
+        public void DisplayGrandTotalSales()
         {
-            DailySalesTotal = dailySales;
-            GrandTotalSales += DailySalesTotal; 
-            Console.WriteLine($"Your grand total sales throughout this current game are ${GrandTotalSales}!\n\n");
+            foreach (Day day in Days)
+            {
+                GrandTotalSales += CurrentDay.DailySales;
+            }
+            Console.WriteLine($"Your grand total sales so far are ${GrandTotalSales}!\n\n");
 
         }
     }

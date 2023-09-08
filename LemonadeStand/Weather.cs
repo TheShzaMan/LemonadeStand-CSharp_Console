@@ -11,7 +11,7 @@ namespace LemonadeStand
     {
         // member variables (HAS A)
         public int ActualTemp;
-        public string ForecastedTemp;
+        private string ForecastedTemp;
         public string ActualCondition;
         public string TodaysForecast;
         private List<string> PredictedWeatherForecasts;
@@ -24,10 +24,17 @@ namespace LemonadeStand
             ActualWeatherConditions = new List<string>() { "sunny", "stormy", "freezing", "windy" };
             rndm = new Random();
             TodaysForecast = PredictedWeatherForecasts[rndm.Next(PredictedWeatherForecasts.Count)];
-
+            ForecastedTemp = ForecastTemp(); 
+            ActualCondition = GenerateWeatherCondition();
+            ActualTemp = GenerateTemperature();
         }
 
         // member methods (CAN DO)
+
+        public void DisplayForecast()
+        {
+            Console.WriteLine($"Today's forecast is {TodaysForecast} with temperatures in the {ForecastedTemp}");
+        }
 
         public string GenerateWeatherCondition()
         {
@@ -38,7 +45,7 @@ namespace LemonadeStand
             ActualCondition = ActualWeatherConditions[rndm.Next(ActualWeatherConditions.Count)];
             return ActualCondition;    
         }
-        public void GenerateTemperature()
+        public int GenerateTemperature()
         {
             if (ActualCondition == "sunny" || ActualCondition == "windy")
             {
@@ -52,8 +59,9 @@ namespace LemonadeStand
             {
                 ActualTemp = rndm.Next(28, 35);
             }
+            return ActualTemp;
         }
-        public void ForecastTemp()
+        public string ForecastTemp()
         {
             List<string> warmTemps = new List<string> { "low 70s", "mid 70s", "high 70s", "low 80s", "mid 80s", "high 80s" };
             List<string> coldTemps = new List<string> { "low 50s", "mid 40s", "high 50s", "low 60s", "mid 50s", "high 40s" };
@@ -73,6 +81,7 @@ namespace LemonadeStand
             {
                 ForecastedTemp = "30s";
             }
+            return ForecastedTemp;
 
         }
     }

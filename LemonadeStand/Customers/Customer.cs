@@ -21,7 +21,7 @@ namespace LemonadeStand
         // constructor (builder, spawner)
         public Customer()
         {
-            
+            Rndm = new Random();
         }
         // methods (CAN DO)
         public virtual void DecideToBuy(string actualWeather, int actualTemp, double pricePerServing)

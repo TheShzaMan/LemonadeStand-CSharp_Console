@@ -15,8 +15,8 @@ namespace LemonadeStand
         private double pricePerSugarCube;
         private double pricePerIceCube;
         private double pricePerCup;
-        public string[] ItemNames;
-        public double[] Prices; 
+        private string[] ItemNames;
+        private double[] Prices; 
         
         // constructor (SPAWNER)
         public Store()
@@ -47,6 +47,8 @@ namespace LemonadeStand
             do
             {
                 indexOfItemToBuy = UserInterface.ChooseItem(ItemNames);
+                if (indexOfItemToBuy == -1)
+                break;
                 itemName = ItemNames[indexOfItemToBuy];
                 double transactionAmount; 
                     
