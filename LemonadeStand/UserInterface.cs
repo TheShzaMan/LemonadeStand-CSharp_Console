@@ -53,10 +53,13 @@ namespace LemonadeStand
         }
         public static string GetPlayerName()
         {
-            string playerNameInput;
+            string playerNameInput = null;
 
-            Console.WriteLine("\nPlease enter a name for yourself:");
-            playerNameInput = Console.ReadLine();
+            while (playerNameInput == null)
+            {
+                Console.WriteLine("\nPlease enter a name for yourself:");
+                playerNameInput = Console.ReadLine();
+            }
             Console.WriteLine($"\nHello {playerNameInput}, pleasure to meet you!\n" +
                 $"<press 'enter' to continue>"); Console.ReadLine();
             return playerNameInput;
@@ -81,12 +84,12 @@ namespace LemonadeStand
             double neededNumber = -1;
             bool correctInputType = false;
 
-            while (!correctInputType || neededNumber <= 0)
+            while (!correctInputType || neededNumber < 0)
             {
                 Console.WriteLine($"{promptToBeRepeatedUntilInputMatch}");
                 correctInputType = Double.TryParse(Console.ReadLine(), out neededNumber);
             }
-            return neededNumber;
+           return neededNumber;
         }
         public static int GetPositiveNumber(string promptToBeRepeatedUntilInputMatch, bool requestingTypeInt)
         {

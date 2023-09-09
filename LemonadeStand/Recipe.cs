@@ -35,23 +35,23 @@ namespace LemonadeStand
                 $"you will also need to have at least 8 cups per pitcher to serve your lemonade.");
             //Console.WriteLine("Press 1 if you would like to adjust the recipe, or press 2 to keep it as is for now...);////add in if adding this as an option
             Console.WriteLine($"\nYou have the price set at ${price} per cup");
+            Console.WriteLine("You can change the price if you'd like, just keep in mind how it could effect sales.");
         }
-        public void AdjustPrice()
+        public void AdjustPrice(string name)
         {
             double newPrice = 0;
             
-            Console.WriteLine("You can change the price if you'd like, just keep in mind how it could effect sales.");
             newPrice = UserInterface.GetPositiveNumber("To change price, enter a positive number without dollar sign. Enter 0 to keep current price");
 
             if (newPrice > 0)
             {
                 price = newPrice;
-                Console.WriteLine($"\nYou have the price set at ${price} per cup");
+                Console.WriteLine($"\nYou have the price set at ${price} per cup...");
             }
-            else if (newPrice == 0) ;
-            
-
-            
+            else if (newPrice == 0)
+            {
+                Console.WriteLine($"Sounds good {name}.  You know this business better than anyone.\n  The price will stay at ${price} per cup...\n");
+            }
         }
     }
 }

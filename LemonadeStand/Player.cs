@@ -31,7 +31,7 @@ namespace LemonadeStand
         {
             Console.WriteLine($"Okay {Name}, let's make some lemonade!\n");
             recipe.DisplayRecipe();
-            recipe.AdjustPrice();
+            recipe.AdjustPrice(Name);
             int numberOfPitchers = UserInterface.GetNumberOfPitchers();
             bool hasEnoughToMakeLemonade = EvaluateRequest(numberOfPitchers);
             if (hasEnoughToMakeLemonade)
@@ -69,7 +69,7 @@ namespace LemonadeStand
             double income = 0;
             while (canSell)
             {
-                if (inventory.LemonadeServings.Count >= servingsOrdered)
+                if (inventory.LemonadeServings.Count > servingsOrdered)
                 {
                     inventory.UseLemonadeFromInventory(servingsOrdered);
                     income = (servingsOrdered * recipe.price);
@@ -78,7 +78,7 @@ namespace LemonadeStand
                     Console.WriteLine($"{Name}: Thank you so much!  Enjoy!");
                     return income;
                 }
-                else if ((inventory.LemonadeServings.Count - servingsOrdered) < 0)
+                else if (inventory.LemonadeServings.Count < servingsOrdered)
                 {
                     Console.WriteLine($"\n{Name}: Sorry, I've only got enough sell you {inventory.LemonadeServings.Count}\n\nYou have sold out for the day.");
                     income = (inventory.LemonadeServings.Count * recipe.price);
