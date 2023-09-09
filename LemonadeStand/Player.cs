@@ -15,6 +15,7 @@ namespace LemonadeStand
         public Wallet wallet;
         public Recipe recipe;
         public string Name;
+        public bool canSell;
 
         // constructor (SPAWNER)
         public Player(string name)
@@ -23,6 +24,7 @@ namespace LemonadeStand
             wallet = new Wallet();
             recipe = new Recipe();
             Name = name;
+            canSell = false;
         }
 
         // member methods (CAN DO)
@@ -65,39 +67,37 @@ namespace LemonadeStand
         }
         public double SellLemonade(int servingsOrdered)
         {
-            bool canSell = true;
+            canSell = true;
             double income = 0;
-            while (canSell)
+           
+            if (inventory.LemonadeServings.Count > servingsOrdered)
             {
-                if (inventory.LemonadeServings.Count > servingsOrdered)
-                {
-                    inventory.UseLemonadeFromInventory(servingsOrdered);
-                    income = (servingsOrdered * recipe.price);
-                    wallet.AcceptMoney(income);
+                inventory.UseLemonadeFromInventory(servingsOrdered);
+                income = (servingsOrdered * recipe.price);
+                wallet.AcceptMoney(income);
 
-                    Console.WriteLine($"{Name}: Thank you so much!  Enjoy!");
-                    return income;
-                }
-                else if (inventory.LemonadeServings.Count < servingsOrdered)
-                {
-                    Console.WriteLine($"\n{Name}: Sorry, I've only got enough sell you {inventory.LemonadeServings.Count}\n\nYou have sold out for the day.");
-                    income = (inventory.LemonadeServings.Count * recipe.price);
-                    wallet.AcceptMoney(income);
-                    inventory.UseLemonadeFromInventory(inventory.LemonadeServings.Count);
-                    canSell = false;
-                    return income;
-                }
-                else
-                {
-                    inventory.UseLemonadeFromInventory(servingsOrdered);
-                    income = (servingsOrdered * recipe.price);
-                    wallet.AcceptMoney(income);
-                    Console.WriteLine($"{Name}: Thank you so much!  Enjoy!\n\nYou have sold out for the day.");
-                    canSell = false;
-                    return income;
-                }
+                Console.WriteLine($"{Name}: Thank you so much!  Enjoy!");
+                return income;
             }
-            return income;
+            else if (inventory.LemonadeServings.Count < servingsOrdered)
+            {
+                Console.WriteLine($"\n{Name}: Sorry, I've only got enough sell you {inventory.LemonadeServings.Count}\n\nYou have sold out for the day.");
+                income = (inventory.LemonadeServings.Count * recipe.price);
+                wallet.AcceptMoney(income);
+                inventory.UseLemonadeFromInventory(inventory.LemonadeServings.Count);
+                canSell = false;
+                return income;
+            }
+            else
+            {
+                inventory.UseLemonadeFromInventory(servingsOrdered);
+                income = (servingsOrdered * recipe.price);
+                wallet.AcceptMoney(income);
+                Console.WriteLine($"{Name}: Thank you so much!  Enjoy!\n\nYou have sold out for the day.");
+                canSell = false;
+                return income;
+                
+            }
         }
     }
 }

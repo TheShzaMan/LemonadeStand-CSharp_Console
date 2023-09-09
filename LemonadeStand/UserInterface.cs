@@ -53,9 +53,9 @@ namespace LemonadeStand
         }
         public static string GetPlayerName()
         {
-            string playerNameInput = null;
+            string playerNameInput = "";
 
-            while (playerNameInput == null)
+            while (playerNameInput == "")
             {
                 Console.WriteLine("\nPlease enter a name for yourself:");
                 playerNameInput = Console.ReadLine();

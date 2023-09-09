@@ -84,6 +84,7 @@ namespace LemonadeStand
         }
         public void OpenForBusiness(Player player)
         {
+            while (player.canSell)
             foreach (Customer customer in TodaysCustomers)
             {
                 customer.DecideToBuy(Weather.ActualCondition, Weather.ActualTemp, player.recipe.price);
