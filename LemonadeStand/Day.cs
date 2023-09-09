@@ -85,11 +85,13 @@ namespace LemonadeStand
         public void OpenForBusiness(Player player)
         {
             while (player.canSell)
-            foreach (Customer customer in TodaysCustomers)
             {
-                customer.DecideToBuy(Weather.ActualCondition, Weather.ActualTemp, player.recipe.price);
-                double income = customer.BuyLemonade(player);
-                DailySales += income;
+                foreach (Customer customer in TodaysCustomers)
+                {
+                    customer.DecideToBuy(Weather.ActualCondition, Weather.ActualTemp, player.recipe.price);
+                    double income = customer.BuyLemonade(player);
+                    DailySales += income;
+                }
             }
             Console.WriteLine($"Your total sales for the day were ${DailySales}!\n\n");
         }
