@@ -42,6 +42,7 @@ namespace LemonadeStand
                 inventory.UseSugarCubesFromInventory(numberOfPitchers * recipe.numberOfSugarCubes);
                 inventory.UseIceCubesFromInventory(numberOfPitchers * recipe.numberOfIceCubes);
                 inventory.AddLemonadeToInventory(numberOfPitchers);
+                canSell = true;
             }
         }
         public bool EvaluateRequest(int numberOfPitchers)
@@ -67,7 +68,7 @@ namespace LemonadeStand
         }
         public double SellLemonade(int servingsOrdered)
         {
-            canSell = true;
+            
             double income = 0;
            
             if (inventory.LemonadeServings.Count > servingsOrdered)
